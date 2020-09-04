@@ -148,8 +148,8 @@ def draw_raw_Graph(graph_folder, bbs_save_path, backbone_save_path, result_path,
 
     plt.subplot(122)
     plt.imshow(img2)
-    plt.savefig(graph_folder + "C9_NY_10K_graph_{}_{}.png".format(src, dest))
     plt.title('"C9_NY_10K_graph_{}_{}.png".format(src, dest)')
+    plt.savefig(graph_folder + "C9_NY_10K_graph_{}_{}.png".format(src, dest))
     plt.cla()
     plt.clf()
 
