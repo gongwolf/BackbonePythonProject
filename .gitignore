@@ -1,0 +1,17 @@
+bin
+include
+lib
+lib64
+pyvenv.cfg
+share
+
+src/json_results
+src/data.json
+
+process_challenge9/output
+
+NADataProcess/NA.cedge
+NADataProcess/NA.cnode
+NADataProcess/NA_NodeInfo.txt
+NADataProcess/NA_SegInfo.txt
+
