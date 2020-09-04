@@ -171,4 +171,3 @@ for query in query_list:
     backbone_save_path = path + "backbone_C9_NY_10K_graph_{}_{}.png".format(src, dest)
     result_path = "/home/gqxwolf/mydata/projectData/BackBone/result/C9_NY_10K/results/"
     draw_raw_Graph(path, bbs_save_path, backbone_save_path, result_path, src, dest)
-    sys.exit()
