@@ -142,14 +142,19 @@ def draw_raw_Graph(graph_folder, bbs_save_path, backbone_save_path, result_path,
     img1 = mpimg.imread(bbs_save_path)
     img2 = mpimg.imread(backbone_save_path)
 
-    plt.figure(1)
-    plt.subplot(121)
-    plt.imshow(img1)
+    fig, ax = plt.subplots(1, 2, figsize=(10, 5), dpi=341)
+    # plt.axis('off')
+    # fig.axes.get_xaxis().set_visible(False)
+    # fig.axes.get_yaxis().set_visible(False)
+    ax[0].imshow(img1)
+    ax[0].axis('off')
 
-    plt.subplot(122)
-    plt.imshow(img2)
-    plt.title('"C9_NY_10K_graph_{}_{}.png".format(src, dest)')
-    plt.savefig(graph_folder + "C9_NY_10K_graph_{}_{}.png".format(src, dest))
+    ax[1].imshow(img2)
+    ax[1].axis('off')
+
+    fig.suptitle("C9_NY_10K_graph_{}_{}.png".format(src, dest), y=0.8)
+    fig.tight_layout()
+    plt.savefig(graph_folder + "C9_NY_10K_graph_{}_{}.png".format(src, dest), bbox_inches='tight')
     plt.cla()
     plt.clf()
 
@@ -166,3 +171,4 @@ for query in query_list:
     backbone_save_path = path + "backbone_C9_NY_10K_graph_{}_{}.png".format(src, dest)
     result_path = "/home/gqxwolf/mydata/projectData/BackBone/result/C9_NY_10K/results/"
     draw_raw_Graph(path, bbs_save_path, backbone_save_path, result_path, src, dest)
+    sys.exit()
