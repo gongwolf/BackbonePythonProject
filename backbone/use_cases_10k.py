@@ -51,7 +51,7 @@ def drawSpecialPath(path_list, ax, node_data, marker="-b", lw=0.5):
             # print(end_node)
             if not start_node.empty and not end_node.empty:
                 # print("{}  {} : {} {} {} {} ".format(start_id, end_id, start_node.iloc[0][1], end_node.iloc[0][1], start_node.iloc[0][2], end_node.iloc[0][2]))
-                plt.plot(
+                ax.plot(
                     [start_node.iloc[0][1], end_node.iloc[0][1]],
                     [start_node.iloc[0][2], end_node.iloc[0][2]],
                     marker,
@@ -94,6 +94,9 @@ def draw_bbs_path(graph_folder, save_path, result_path, src, dest):
 
     # plt.scatter(node_data[1], node_data[2], marker="o", alpha=0.99)
     plt.savefig(save_path)
+    plt.clf()
+    plt.cla()
+    plt.close(fig)
     gc.collect()
 
 
@@ -132,10 +135,14 @@ def draw_backbone_path(graph_folder, save_path, result_path, src, dest):
 
     # plt.scatter(node_data[1], node_data[2], marker="o", alpha=0.99)
     plt.savefig(save_path)
+    plt.clf()
+    plt.cla()
+    plt.close(fig)
     gc.collect()
 
 
-def draw_raw_Graph(graph_folder, bbs_save_path, backbone_save_path, result_path, src, dest):
+def draw_raw_Graph(graph_folder, bbs_save_path, backbone_save_path, result_path, src, dest, bbs_paths, backbone_paths,
+                   coefficient):
     draw_bbs_path(graph_folder, bbs_save_path, result_path, src, dest)
     draw_backbone_path(graph_folder, backbone_save_path, result_path, src, dest)
 
@@ -152,23 +159,32 @@ def draw_raw_Graph(graph_folder, bbs_save_path, backbone_save_path, result_path,
     ax[1].imshow(img2)
     ax[1].axis('off')
 
-    fig.suptitle("C9_NY_10K_graph_{}_{}.png".format(src, dest), y=0.8)
+    fig.suptitle("C9_NY_10K_graph_{}_{}.png \n {}_{}_{}".format(src, dest, bbs_paths, backbone_paths, coefficient),
+                 y=0.8)
     fig.tight_layout()
     plt.savefig(graph_folder + "C9_NY_10K_graph_{}_{}.png".format(src, dest), bbox_inches='tight')
     plt.cla()
     plt.clf()
+    plt.close(fig)
     gc.collect()
 
 
 # '''USE CASES ON C9_NY_10K'''
 query_list = np.genfromtxt('query.list', delimiter='	')
 # print(query_list)
-for query in query_list:
+
+for i in len(range(query_list)):
+    query = query_list[i]
     src = int(query[0])
     dest = int(query[1])
-    print("drawing the figures from {} to {}".format(src, dest))
+    bbs_paths = int(query[2])
+    backbone_paths = int(query[3])
+    coefficient = query[4]
+    print("{} : drawing the figures from {} to {}".format(i, src, dest))
     path = "/home/gqxwolf/mydata/projectData/BackBone/C9_NY_10K/level0/"
     bbs_save_path = path + "bbs_C9_NY_10K_graph_{}_{}.png".format(src, dest)
     backbone_save_path = path + "backbone_C9_NY_10K_graph_{}_{}.png".format(src, dest)
     result_path = "/home/gqxwolf/mydata/projectData/BackBone/result/C9_NY_10K/results/"
-    draw_raw_Graph(path, bbs_save_path, backbone_save_path, result_path, src, dest)
+    draw_raw_Graph(path, bbs_save_path, backbone_save_path, result_path, src, dest, bbs_paths, backbone_paths,
+                   coefficient)
+    # break
