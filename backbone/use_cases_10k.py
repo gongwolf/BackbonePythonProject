@@ -173,7 +173,7 @@ def draw_raw_Graph(graph_folder, bbs_save_path, backbone_save_path, result_path,
 query_list = np.genfromtxt('query.list', delimiter='	')
 # print(query_list)
 
-for i in len(range(query_list)):
+for i in range(len(query_list)):
     query = query_list[i]
     src = int(query[0])
     dest = int(query[1])
