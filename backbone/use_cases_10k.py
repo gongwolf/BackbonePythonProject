@@ -157,6 +157,7 @@ def draw_raw_Graph(graph_folder, bbs_save_path, backbone_save_path, result_path,
     plt.savefig(graph_folder + "C9_NY_10K_graph_{}_{}.png".format(src, dest), bbox_inches='tight')
     plt.cla()
     plt.clf()
+    gc.collect()
 
 
 # '''USE CASES ON C9_NY_10K'''
